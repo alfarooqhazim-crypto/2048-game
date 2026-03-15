@@ -1,0 +1,488 @@
+/* ---------- ملف style.css الكامل مع جميع التنسيقات والسمات ---------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* تعريف متغيرات السمة الكلاسيكية (الافتراضية) */
+:root {
+    --bg-color: #faf8ef;
+    --text-color: #776e65;
+    --panel-bg: #eee4da;
+    --board-bg: #bbada0;
+    --cell-bg: #cdc1b4;
+    --button-bg: #bbada0;
+    --button-shadow: #8f7a66;
+    --button-hover: #9f8a76;
+    --banner-bg: #f8f8f8;
+    --banner-text: #555;
+    --modal-bg: #fefefe;
+    --modal-text: #333;
+    --border-light: #ddd;
+    --input-bg: #fff;
+    --input-text: #333;
+}
+
+/* السمة الداكنة */
+body.theme-dark {
+    --bg-color: #1e1e2f;
+    --text-color: #f0f0f0;
+    --panel-bg: #2d2d44;
+    --board-bg: #3a3a55;
+    --cell-bg: #4a4a6a;
+    --button-bg: #4a4a6a;
+    --button-shadow: #2a2a3a;
+    --button-hover: #5a5a7a;
+    --banner-bg: #2d2d44;
+    --banner-text: #ccc;
+    --modal-bg: #2d2d44;
+    --modal-text: #f0f0f0;
+    --border-light: #555;
+    --input-bg: #3a3a55;
+    --input-text: #f0f0f0;
+}
+
+/* السمة الطبيعية */
+body.theme-nature {
+    --bg-color: #e8f5e9;
+    --text-color: #2e7d32;
+    --panel-bg: #c8e6c9;
+    --board-bg: #81c784;
+    --cell-bg: #a5d6a7;
+    --button-bg: #66bb6a;
+    --button-shadow: #2e7d32;
+    --button-hover: #4caf50;
+    --banner-bg: #c8e6c9;
+    --banner-text: #2e7d32;
+    --modal-bg: #f1f8e9;
+    --modal-text: #1b5e20;
+    --border-light: #a5d6a7;
+    --input-bg: #fff;
+    --input-text: #1b5e20;
+}
+
+/* السمة المستقبلية */
+body.theme-futuristic {
+    --bg-color: #0a192f;
+    --text-color: #ccd6f6;
+    --panel-bg: #172a45;
+    --board-bg: #1e3a5f;
+    --cell-bg: #2b4b75;
+    --button-bg: #2b4b75;
+    --button-shadow: #0a192f;
+    --button-hover: #3a6b9f;
+    --banner-bg: #172a45;
+    --banner-text: #8892b0;
+    --modal-bg: #172a45;
+    --modal-text: #ccd6f6;
+    --border-light: #2b4b75;
+    --input-bg: #1e3a5f;
+    --input-text: #ccd6f6;
+}
+
+/* تطبيق المتغيرات على العناصر */
+body {
+    font-family: 'Arial', Helvetica, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    direction: rtl;
+    padding-bottom: 70px; /* مساحة للبانر الثابت */
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* نقش تراثي خفيف (يظهر في جميع السمات) */
+body::before {
+    content: "𖧷";
+    font-size: min(200px, 40vw);
+    color: rgba(0, 0, 0, 0.03);
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    transform: rotate(-15deg);
+    pointer-events: none;
+    z-index: -1;
+    font-family: Arial, sans-serif;
+}
+
+body.theme-dark::before {
+    color: rgba(255, 255, 255, 0.03);
+}
+
+body.theme-nature::before {
+    color: rgba(46, 125, 50, 0.03);
+}
+
+body.theme-futuristic::before {
+    color: rgba(204, 214, 246, 0.03);
+}
+
+/* الحاوية الرئيسية */
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+}
+
+/* العنوان */
+h1 {
+    color: var(--text-color);
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    margin: 10px 0;
+}
+
+/* شريط العلم العراقي (ثابت) */
+.flag-strip {
+    display: flex;
+    height: 8px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.flag-strip div {
+    flex: 1;
+    height: 100%;
+}
+.flag-strip .red { background-color: #ce1126; }
+.flag-strip .white { background-color: #ffffff; }
+.flag-strip .black { background-color: #000000; }
+.flag-strip .green { background-color: #007a3d; }
+
+/* شريط الأدوات */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.toolbar button,
+.theme-select,
+.player-name-input,
+.toolbar-btn {
+    background-color: var(--button-bg);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--button-shadow);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-select {
+    width: auto;
+    padding: 0 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--panel-bg);
+    box-shadow: 0 4px 0 var(--button-shadow);
+    cursor: pointer;
+    border: 1px solid var(--border-light);
+}
+
+.player-name-input {
+    width: 100px;
+    font-size: 0.9rem;
+    padding: 0 8px;
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--border-light);
+    cursor: text;
+}
+
+.toolbar-btn {
+    font-size: 1.2rem;
+}
+
+.toolbar button:active,
+.theme-select:active,
+.toolbar-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.toolbar button:hover,
+.theme-select:hover,
+.toolbar-btn:hover {
+    background-color: var(--button-hover);
+}
+
+/* لوحة النتائج */
+.score-panel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px auto;
+    width: 100%;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: var(--text-color);
+    background-color: var(--panel-bg);
+    padding: 10px 15px;
+    border-radius: 10px;
+    gap: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#new-game {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    min-width: 100px;
+    box-shadow: 0 4px 0 var(--button-shadow);
+    transition: all 0.2s ease;
+}
+
+#new-game:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+/* شبكة اللعبة */
+.game-board {
+    display: grid;
+    gap: clamp(5px, 2vw, 10px);
+    background-color: var(--board-bg);
+    padding: clamp(10px, 3vw, 15px);
+    border-radius: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    max-width: min(90vw, 600px);
+    touch-action: none;
+    user-select: none;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* الخلايا */
+.cell {
+    aspect-ratio: 1 / 1;
+    background-color: var(--cell-bg);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    font-weight: bold;
+    color: var(--text-color);
+    transition: all 0.15s ease-in-out;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* تأثيرات الحركة */
+.cell.new {
+    animation: appear 0.2s ease;
+}
+
+@keyframes appear {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+.cell.merge {
+    animation: merge 0.15s ease;
+}
+
+@keyframes merge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* أزرار التحكم */
+.control-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.middle-row {
+    display: flex;
+    gap: clamp(10px, 4vw, 15px);
+    justify-content: center;
+}
+
+.control-btn {
+    background-color: var(--button-bg);
+    border: none;
+    color: white;
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    width: clamp(60px, 18vw, 80px);
+    height: clamp(60px, 18vw, 80px);
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--button-shadow);
+    transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.control-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.control-btn:hover {
+    background-color: var(--button-hover);
+}
+
+/* إعلان البانر الثابت */
+.banner-ad {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--banner-bg);
+    border-top: 2px solid var(--board-bg);
+    padding: clamp(8px, 2vh, 12px);
+    text-align: center;
+    font-size: clamp(14px, 4vw, 16px);
+    color: var(--banner-text);
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+/* النوافذ المنبثقة (modal) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--modal-text);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--border-light);
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    direction: rtl;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close {
+    color: #aaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: var(--text-color);
+}
+
+/* تنسيق خاص بنافذة كيف تلعب */
+.howto-content {
+    max-width: 500px;
+    text-align: right;
+}
+
+.howto-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--modal-text);
+}
+
+.howto-text ul {
+    padding-right: 20px;
+    margin: 10px 0;
+}
+
+.howto-text li {
+    margin: 5px 0;
+}
+
+/* قائمة المتصدرين */
+#leaderboard-list {
+    list-style-position: inside;
+    padding-right: 0;
+    margin: 10px 0;
+}
+
+#leaderboard-list li {
+    padding: 5px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 500px) {
+    .toolbar button,
+    .theme-select,
+    .player-name-input,
+    .toolbar-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .theme-select {
+        width: auto;
+        font-size: 0.9rem;
+        padding: 0 5px;
+    }
+    .player-name-input {
+        width: 80px;
+        font-size: 0.8rem;
+    }
+    .score-panel {
+        flex-direction: column;
+        text-align: center;
+    }
+    .modal-content {
+        margin: 30% auto;
+        width: 90%;
+    }
+}
+
+/* تحسينات للأجهزة الصغيرة جداً */
+@media (max-width: 350px) {
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    .toolbar button {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    .player-name-input {
+        width: 70px;
+    }
+}

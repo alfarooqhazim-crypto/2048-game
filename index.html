@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لعبة 2048 المتكاملة</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#4a4a4a">
+</head>
+<body class="theme-classic">
+    <!-- شريط ألوان العلم العراقي -->
+    <div class="flag-strip">
+        <div class="red"></div>
+        <div class="white"></div>
+        <div class="black"></div>
+        <div class="green"></div>
+    </div>
+
+    <div class="container">
+        <h1 id="game-title">٢٠٤٨</h1>
+
+        <!-- شريط الأدوات مع إضافة اسم المستخدم -->
+        <div class="toolbar">
+            <button id="undo-btn" title="تراجع">↩️</button>
+            <button id="stats-btn" title="إحصائيات">📊</button>
+            <button id="share-btn" title="مشاركة">📤</button>
+            <button id="challenge-toggle" title="وضع التحدي">⚡</button>
+            <button id="size-select" title="تغيير الحجم">4x4</button>
+            <button id="leaderboard-btn" title="المتصدرين">🏆</button>
+            <button id="export-btn" title="تصدير الحفظ">💾</button>
+            <button id="import-btn" title="استيراد الحفظ">📂</button>
+            <button id="howto-btn" title="كيف تلعب">❓</button>
+            <!-- قائمة السمات -->
+            <select id="theme-select" class="theme-select" title="اختر السمة">
+                <option value="classic">كلاسيكي</option>
+                <option value="dark">داكن</option>
+                <option value="nature">طبيعة</option>
+                <option value="futuristic">مستقبلي</option>
+            </select>
+            <!-- إدخال اسم اللاعب -->
+            <input type="text" id="player-name" placeholder="اسمك" maxlength="20" class="player-name-input">
+            <button id="save-name-btn" title="حفظ الاسم" class="toolbar-btn">💾</button>
+        </div>
+
+        <!-- لوحة النتائج -->
+        <div class="score-panel">
+            <div>النتيجة: <span id="score">0</span></div>
+            <div>أفضل نتيجة: <span id="high-score">0</span></div>
+            <div>الوقت: <span id="timer">00:00</span></div>
+            <div>الحركات: <span id="moves">0</span></div>
+            <button id="new-game">لعبة جديدة</button>
+        </div>
+
+        <!-- شبكة اللعبة -->
+        <div class="game-board" id="board"></div>
+
+        <!-- أزرار التحكم -->
+        <div class="control-buttons">
+            <button class="control-btn" data-direction="up">⬆️</button>
+            <div class="middle-row">
+                <button class="control-btn" data-direction="left">⬅️</button>
+                <button class="control-btn" data-direction="down">⬇️</button>
+                <button class="control-btn" data-direction="right">➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- إعلان بانر ثابت -->
+    <div class="banner-ad">
+        [إعلان] يمكنك وضع كود AdSense هنا
+    </div>
+
+    <!-- نوافذ منبثقة -->
+    <div id="stats-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>إحصائيات متقدمة</h2>
+            <p>مجموع النقاط: <span id="total-score">0</span></p>
+            <p>أكبر رقم: <span id="max-tile">0</span></p>
+            <p>مرات الفوز: <span id="win-count">0</span></p>
+            <p>مرات الخسارة: <span id="lose-count">0</span></p>
+            <p>عدد الألعاب: <span id="games-played">0</span></p>
+            <p>متوسط الوقت: <span id="avg-time">00:00</span></p>
+        </div>
+    </div>
+
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🏆 أفضل 10 نتائج</h2>
+            <ol id="leaderboard-list"></ol>
+        </div>
+    </div>
+
+    <div id="howto-modal" class="modal">
+        <div class="modal-content howto-content">
+            <span class="close">&times;</span>
+            <h2>كيف تلعب 2048</h2>
+            <div class="howto-text">
+                <p>🎯 <strong>الهدف:</strong> ادمج الأرقام المتساوية للوصول إلى 2048.</p>
+                <p>🕹️ <strong>الطريقة:</strong> استخدم الأسهم أو السحب لتحريك الأرقام، وستندمج المتساوية.</p>
+                <p>✨ <strong>نصائح:</strong> حافظ على أكبر رقم في زاوية، وخطط لحركاتك.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

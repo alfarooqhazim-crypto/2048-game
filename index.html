@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>لعبة 2048 </title>
+    <title>لعبة 2048 المتكاملة</title>
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#4a4a4a">
 </head>
@@ -19,7 +19,7 @@
     <div class="container">
         <h1 id="game-title">٢٠٤٨</h1>
 
-        <!-- شريط الأدوات مع إضافة اسم المستخدم -->
+        <!-- شريط الأدوات مع إضافة اسم المستخدم وروابط السياسات -->
         <div class="toolbar">
             <button id="undo-btn" title="تراجع">↩️</button>
             <button id="stats-btn" title="إحصائيات">📊</button>
@@ -40,6 +40,9 @@
             <!-- إدخال اسم اللاعب -->
             <input type="text" id="player-name" placeholder="اسمك" maxlength="20" class="player-name-input">
             <button id="save-name-btn" title="حفظ الاسم" class="toolbar-btn">💾</button>
+            <!-- روابط سياسة الخصوصية وشروط الاستخدام (أيقونات) -->
+            <a href="privacy-policy.html" style="text-decoration: none;" title="سياسة الخصوصية"><button>📜</button></a>
+            <a href="terms-of-service.html" style="text-decoration: none;" title="شروط الاستخدام"><button>⚖️</button></a>
         </div>
 
         <!-- لوحة النتائج -->
@@ -65,9 +68,12 @@
         </div>
     </div>
 
-    <!-- إعلان بانر ثابت -->
+    <!-- إعلان بانر ثابت مع روابط السياسات -->
     <div class="banner-ad">
         [إعلان] يمكنك وضع كود AdSense هنا
+        <br>
+        <a href="privacy-policy.html" style="color: var(--banner-text);">سياسة الخصوصية</a> | 
+        <a href="terms-of-service.html" style="color: var(--banner-text);">شروط الاستخدام</a>
     </div>
 
     <!-- نوافذ منبثقة -->
